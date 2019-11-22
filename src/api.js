@@ -8,4 +8,16 @@ const api = axios.create({
   }
 })
 
-export default api
+
+export const movieApi = {
+  // url 맨앞에 "/"이거 주의 --> "/" 있을 시 절대경로로 인식되어, baseUrl을 덮어쓴다.
+  nowPlaying: () => api.get("movie/now_playing"),
+  upcoming: () => api.get("movie/upcoming"),
+  popular: () => api.get("movie/popular"),
+}
+
+export const tvApi = {
+  topRated: () => api.get("tv/top_rated"),
+  popular: () => api.get("tv/popular"),
+  airingToday: () => api.get("tv/airing_today"),
+}
