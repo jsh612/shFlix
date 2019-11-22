@@ -52,23 +52,3 @@ export default withRouter(({ location: { pathname } }) => (
     </List>
   </Header>
 ));
-
-// // 위와 동일
-// const HeaderC = props => (
-//   <Header>
-//     {console.log(props.location.pathname)}
-//     <List>
-//       <Item current={"/" === props.location.pathname}>
-//         <SLink to="/">Home</SLink>
-//       </Item>
-//       <Item current={"/tv" === props.location.pathname}>
-//         <SLink to="/tv">TV</SLink>
-//       </Item>
-//       <Item current={"/search" === props.location.pathname}>
-//         <SLink to="/search">Search</SLink>
-//       </Item>
-//     </List>
-//   </Header>
-// );
-
-// export default withRouter(HeaderC);
