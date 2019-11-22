@@ -8,8 +8,4 @@ const api = axios.create({
   }
 })
 
-// 해당 url앞에 "/" 붙일경우 절대경로로 인식되어 baseURL을 덮어쓰게된다.
-// 따라서 "tv/popular" 이런식으로 작성
-api.get("tv/popular");
-
 export default api
