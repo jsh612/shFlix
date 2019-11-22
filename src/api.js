@@ -14,10 +14,38 @@ export const movieApi = {
   nowPlaying: () => api.get("movie/now_playing"),
   upcoming: () => api.get("movie/upcoming"),
   popular: () => api.get("movie/popular"),
+  moiveDetail: id => api.get(`movie/${id}`, {
+    params: {
+      append_to_response: "videos"
+    }
+  }),
+  search: term => api.get("search/movie", {
+    params: {
+      query: encodeURIComponent(term)
+    }
+  })
 }
 
+
+
 export const tvApi = {
-  topRated: () => api.get("tv/top_rated"),
+  topRated: () => api.get("tv/top_rated", {
+    params: {
+      //append_to_response --> 이것을 통해 서브 요청가능
+      //videos --> 예고편을 가져올 수 있다.
+      append_to_response: "videos"
+    }
+  }),
   popular: () => api.get("tv/popular"),
   airingToday: () => api.get("tv/airing_today"),
+  showDetail: id => api.get(`tv/${id}`, {
+    params: {
+      append_to_response: "videos"
+    }
+  }),
+  search: term => api.get("search/tv", {
+    params: {
+      query: encodeURIComponent(term)
+    }
+  })
 }
