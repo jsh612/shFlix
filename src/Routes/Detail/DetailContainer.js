@@ -1,7 +1,6 @@
 import React from "react";
 import DetailPresenter from "./DetailPresenter";
 import { moviesApi, tvApi } from "../../api";
-import { request } from "http";
 
 export default class extends React.Component {
   constructor(props) {
@@ -12,13 +11,13 @@ export default class extends React.Component {
     this.state = {
       result: null,
       error: null,
-      loading: null,
+      loading: true,
       isMovie: pathname.includes("/movie/")
     };
   }
 
   async componentDidMount() {
-    console.log("DetailContainer.js / this.props: ", this.props); // {match, location, history}
+    // console.log("DetailContainer.js / this.props: ", this.props); // {match, location, history}
     // route는 기본적으로 props를 전달 받는다.
     // https://reacttraining.com/react-router/web/api/Route/route-props
     const {
@@ -43,7 +42,6 @@ export default class extends React.Component {
       console.log("DetailContainer.js / error: ", error);
       this.setState({ error: "해당 검색어를 찾을 수 없습니다." });
     } finally {
-      console.log("DetailContainer.js / result: ", result);
       this.setState({ loading: false, result });
     }
   }
