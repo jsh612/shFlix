@@ -25,11 +25,9 @@ export default class extends React.Component {
       } = await tvApi.airingToday();
       this.setState({ topRated, popular, airingToday });
     } catch (error) {
-      console.log("TvContainer.js 오류:", error);
       this.setState({ error: "tv 정보를 찾지 못했습니다..." });
     } finally {
       this.setState({ loading: false });
-      console.log(this.state);
     }
   }
 
