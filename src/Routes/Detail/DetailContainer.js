@@ -35,11 +35,9 @@ export default class extends React.Component {
     let result = null;
     try {
       if (isMovie) {
-        const request = await moviesApi.moiveDetail(parseId);
-        result = request.data;
+        ({ data: result } = await moviesApi.moiveDetail(parseId));
       } else {
-        const request = await tvApi.showDetail(parseId);
-        result = request.data;
+        ({ data: result } = await tvApi.showDetail(parseId));
       }
     } catch (error) {
       console.log("DetailContainer.js / error: ", error);
