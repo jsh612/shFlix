@@ -21,6 +21,7 @@ const Grid = styled.div`
 `;
 
 const Section = ({ title, children }) => (
+  // props.children : https://ko.reactjs.org/docs/composition-vs-inheritance.html#containment
   <Container>
     <Title>{title}</Title>
     <Grid>{children}</Grid>

@@ -37,8 +37,6 @@ export default class extends React.Component {
     }
   };
 
-  async componentDidMount() {}
-
   render() {
     const { movieResults, tvResults, searchTerm, loading, error } = this.state;
     return (
