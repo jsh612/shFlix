@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
-import Message from "../../Components/Message";
 
 const Container = styled.div`
   height: calc(100vh - 80px);
@@ -31,8 +30,10 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  justify-items: center;
   @media screen and (max-width: 768px) {
     align-items: center;
+    justify-items: center;
     flex-direction: column;
   }
 `;
@@ -44,7 +45,7 @@ const Cover = styled.div`
   border-radius: 4px;
   background-size: cover;
   background-position: center center;
-  @media screen and (min-width: 385px) and (max-width: 780px) {
+  @media screen and (min-width: 385px) and (max-width: 1024px) {
     justify-items: center;
     width: 50%;
     height: 50%;
@@ -53,6 +54,40 @@ const Cover = styled.div`
     justify-items: center;
     width: 60%;
     height: 40%;
+  }
+`;
+
+const Data = styled.div`
+  width: 70%;
+  margin-left: 10px;
+  justify-items: center;
+`;
+
+const Title = styled.h3`
+  font-size: 32px;
+  margin-bottom: 10px;
+  @media screen and (max-width: 414px) {
+    margin-top: 10px;
+  }
+`;
+
+const ItemContainer = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Item = styled.span``;
+
+const Dvider = styled.span`
+  margin: 0 12px;
+`;
+
+const Overview = styled.p`
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 1.5;
+  width: 50%;
+  @media screen and (max-width: 414px) {
+    width: 100%;
   }
 `;
 
@@ -72,6 +107,35 @@ const DetailPresenter = ({ result, loading, error }) =>
               : require("../../assets/basicPoster.png")
           }
         />
+        <Data>
+          <Title>
+            {result.original_title
+              ? result.original_title
+              : result.original_name}
+            <Dvider />[{result.title ? result.title : result.name}]
+          </Title>
+          <ItemContainer>
+            <Item>
+              {result.release_date
+                ? result.release_date
+                : result.first_air_date}
+            </Item>
+            <Dvider>•</Dvider>
+            <Item>
+              {result.runtime ? result.runtime : result.episode_run_time[0]} min
+            </Item>
+            <Dvider>•</Dvider>
+            <Item>
+              {result.genres &&
+                result.genres.map((genre, index) =>
+                  index === result.genres.length - 1
+                    ? genre.name
+                    : `${genre.name} / `
+                )}
+            </Item>
+          </ItemContainer>
+          <Overview>{result.overview}</Overview>
+        </Data>
       </Content>
     </Container>
   );
