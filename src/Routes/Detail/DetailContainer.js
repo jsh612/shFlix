@@ -40,7 +40,7 @@ export default class extends React.Component {
       }
     } catch (error) {
       console.log("DetailContainer.js / error: ", error);
-      this.setState({ error: "해당 검색어를 찾을 수 없습니다." });
+      this.setState({ error: "해당 자료를 찾을 수 없습니다." });
     } finally {
       this.setState({ loading: false, result });
     }

@@ -21,8 +21,8 @@ const Title = styled.span`
 const Image = styled.div`
   background-image: url(${props => props.bgUrl});
   height: 180px;
-  background-size: cover;
   border-radius: 4px;
+  background-size: cover;
   background-position: center center;
   transition: opacity 0.1s linear;
 `;
@@ -46,7 +46,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
   <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
-        {/* {console.log(require("../assets/basicPoster.png"))}// 해당 파일의 주소 출력 */}
+        {/* {console.log(require("../assets/basicPoster.png"))} // /static/media/basicPoster.baba165f.png */}
         <Image
           bgUrl={
             imageUrl
