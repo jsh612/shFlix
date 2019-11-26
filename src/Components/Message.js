@@ -1,5 +1,5 @@
 import React from "react";
-import PropsTypes from "prop-types";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -20,8 +20,8 @@ const Message = ({ text, color }) => (
 );
 
 Message.propsTypes = {
-  text: PropsTypes.string.isRequired,
-  color: PropsTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired
 };
 
 export default Message;
