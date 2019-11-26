@@ -40,7 +40,7 @@ export default withRouter(({ location: { pathname } }) => (
   <Header>
     <List>
       <Item current={"/" === pathname}>
-        <SLink to="/">Home</SLink>
+        <SLink to="/">Movie</SLink>
       </Item>
       <Item current={"/tv" === pathname}>
         <SLink to="/tv">TV</SLink>
