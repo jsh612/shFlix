@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
+import IMDb from "../../Components/IMDb";
+import Production from "../../Components/Production";
+import Countries from "../../Components/Countries";
+import Youtubes from "../../Components/Youtubes";
+import Seasons from "../../Components/Seasons";
 
 const Container = styled.div`
   height: calc(100vh - 80px);
@@ -12,7 +17,7 @@ const Container = styled.div`
 `;
 
 const Backdrop = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -27,10 +32,10 @@ const Backdrop = styled.div`
 `;
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
-  position: relative;
   justify-items: center;
   @media screen and (max-width: 768px) {
     align-items: center;
@@ -39,18 +44,22 @@ const Content = styled.div`
 `;
 
 const Cover = styled.div`
-  width: 30%;
-  height: 100%;
+  position: fixed;
+  bottom: 40px;
+  width: 35%;
+  height: 80%;
   background-image: url(${props => props.bgImage});
   border-radius: 4px;
   background-size: cover;
   background-position: center center;
-  @media screen and (min-width: 385px) and (max-width: 1024px) {
+  @media screen and (min-width: 345px) and (max-width: 1024px) {
+    position: relative;
     justify-items: center;
     width: 50%;
     height: 50%;
   }
   @media screen and (max-width: 414px) {
+    position: relative;
     justify-items: center;
     width: 60%;
     height: 40%;
@@ -59,8 +68,11 @@ const Cover = styled.div`
 
 const Data = styled.div`
   width: 70%;
-  margin-left: 10px;
+  margin-left: 470px;
   justify-items: center;
+  @media screen and (min-width: 340px) and (max-width: 1024px) {
+    margin-left: 30px;
+  }
 `;
 
 const Title = styled.h3`
@@ -89,6 +101,21 @@ const Overview = styled.p`
   @media screen and (max-width: 780px) {
     width: 100%;
   }
+`;
+
+const SubContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const SubTitle = styled.div`
+  margin-top: 30px;
+  font-size: 22px;
+`;
+
+const SeasonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const DetailPresenter = ({ result, loading, error }) => (
@@ -151,8 +178,60 @@ const DetailPresenter = ({ result, loading, error }) => (
                       : `${genre.name} / `
                   )}
               </Item>
+              {result.original_title ? (
+                <>
+                  <Dvider>•</Dvider>
+                  <IMDb key={result.imdb_id} imdb_id={result.imdb_id} />
+                </>
+              ) : null}
             </ItemContainer>
             <Overview>{result.overview}</Overview>
+            {console.log(result)}
+            <SubContainer>
+              {result.production_companies ? (
+                <SubTitle>Production Companies</SubTitle>
+              ) : null}
+              {result.production_companies
+                ? result.production_companies.map(logo => {
+                    return logo.logo_path ? (
+                      <Production
+                        key={logo.logo_path}
+                        logo_path={logo.logo_path}
+                      />
+                    ) : null;
+                  })
+                : null}
+              {result.production_countries ? (
+                <SubTitle>Production Countries</SubTitle>
+              ) : null}
+              {result.production_countries
+                ? result.production_countries.map(name => {
+                    return <Countries key={name.name} name={name.name} />;
+                  })
+                : null}
+              {result.seasons ? <SubTitle>Seasons</SubTitle> : null}
+              <SeasonContainer>
+                {result.seasons
+                  ? result.seasons.map(season => {
+                      return (
+                        <Seasons
+                          id={season.id}
+                          poster_path={season.poster_path}
+                          name={season.name}
+                        ></Seasons>
+                      );
+                    })
+                  : null}
+              </SeasonContainer>
+              {result.videos.results.length > 0 ? (
+                <SubTitle>예고편</SubTitle>
+              ) : null}
+              {result.videos.results
+                ? result.videos.results.map(video => {
+                    return <Youtubes key={video.key} id={video.key}></Youtubes>;
+                  })
+                : null}
+            </SubContainer>
           </Data>
         </Content>
       </Container>

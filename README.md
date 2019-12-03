@@ -19,4 +19,3 @@ React를 활용한 영화 앱 만들기
 - [x] TV Show Detail
 - [x] Movie Detail
 - [x] Search (Movie, TV)
-
