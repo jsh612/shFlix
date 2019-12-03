@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
 
 const Container = styled.div`
@@ -33,7 +34,6 @@ const Content = styled.div`
   justify-items: center;
   @media screen and (max-width: 768px) {
     align-items: center;
-    justify-items: center;
     flex-direction: column;
   }
 `;
@@ -86,64 +86,79 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 50%;
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 780px) {
     width: 100%;
   }
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
-  loading ? (
-    <Loader />
-  ) : (
-    <Container>
-      <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
-      />
-      <Content>
-        <Cover
-          bgImage={
-            result.poster_path
-              ? `https://image.tmdb.org/t/p/w300${result.poster_path}`
-              : require("../../assets/basicPoster.png")
-          }
-        />
-        <Data>
-          <Title>
+const DetailPresenter = ({ result, loading, error }) => (
+  <>
+    <Helmet>
+      <title> 로딩중 | 황정민flix </title>
+    </Helmet>
+    {loading ? (
+      <Loader />
+    ) : (
+      <Container>
+        <Helmet>
+          <title>
+            {" "}
             {result.original_title
               ? result.original_title
-              : result.original_name}
-            <Dvider />[{result.title ? result.title : result.name}]
-          </Title>
-          <ItemContainer>
-            <Item>
-              {result.release_date
-                ? result.release_date
-                : result.first_air_date}
-            </Item>
-            <Dvider>•</Dvider>
-            <Item>
-              {result.runtime
-                ? result.runtime
-                : result.episode_run_time
-                ? result.episode_run_time[0]
-                : ""}{" "}
-              min
-            </Item>
-            <Dvider>•</Dvider>
-            <Item>
-              {result.genres &&
-                result.genres.map((genre, index) =>
-                  index === result.genres.length - 1
-                    ? genre.name
-                    : `${genre.name} / `
-                )}
-            </Item>
-          </ItemContainer>
-          <Overview>{result.overview}</Overview>
-        </Data>
-      </Content>
-    </Container>
-  );
+              : result.original_name}{" "}
+            | Shflix
+          </title>
+        </Helmet>
+        <Backdrop
+          bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
+        />
+        <Content>
+          <Cover
+            bgImage={
+              result.poster_path
+                ? `https://image.tmdb.org/t/p/w300${result.poster_path}`
+                : require("../../assets/basicPoster.png")
+            }
+          />
+          <Data>
+            <Title>
+              {result.original_title
+                ? result.original_title
+                : result.original_name}
+              <Dvider />[{result.title ? result.title : result.name}]
+            </Title>
+            <ItemContainer>
+              <Item>
+                {result.release_date
+                  ? result.release_date
+                  : result.first_air_date}
+              </Item>
+              <Dvider>•</Dvider>
+              <Item>
+                {result.runtime
+                  ? result.runtime
+                  : result.episode_run_time
+                  ? result.episode_run_time[0]
+                  : ""}{" "}
+                min
+              </Item>
+              <Dvider>•</Dvider>
+              <Item>
+                {result.genres &&
+                  result.genres.map((genre, index) =>
+                    index === result.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / `
+                  )}
+              </Item>
+            </ItemContainer>
+            <Overview>{result.overview}</Overview>
+          </Data>
+        </Content>
+      </Container>
+    )}
+  </>
+);
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,

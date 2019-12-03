@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Section";
 import Message from "../../Components/Message";
@@ -31,6 +32,9 @@ const SearchPresenter = ({
   updateTerm
 }) => (
   <Container>
+    <Helmet>
+      <title> 검색 | 황정민flix</title>
+    </Helmet>
     <Form onSubmit={handleSubmit}>
       {/* value 값을 searchTerm과 연동시켜 사용자가 입력이 해당 값이 변하도록한다 */}
       <Input
