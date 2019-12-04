@@ -45,9 +45,9 @@ const Content = styled.div`
 
 const Cover = styled.div`
   position: fixed;
-  bottom: 40px;
+  bottom: 20px;
   width: 35%;
-  height: 80%;
+  height: 90%;
   background-image: url(${props => props.bgImage});
   border-radius: 4px;
   background-size: cover;
@@ -55,6 +55,7 @@ const Cover = styled.div`
   @media screen and (min-width: 345px) and (max-width: 1024px) {
     position: relative;
     justify-items: center;
+    margin: 10px;
     width: 50%;
     height: 50%;
   }
@@ -67,11 +68,14 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
-  width: 70%;
-  margin-left: 470px;
+  position: absolute;
+  width: 60%;
+  margin: 0 0 5px 40%;
   justify-items: center;
   @media screen and (min-width: 340px) and (max-width: 1024px) {
-    margin-left: 30px;
+    width: 80%;
+    position: relative;
+    margin-left: 0;
   }
 `;
 
